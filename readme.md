@@ -63,5 +63,3 @@
     <li>De um lado do resistor iremos ligar no polo negativo da protoboard</li>
     <li>Do lado que não ligamos no polo negativo da protoboard, iremos conectar com um jumper na porta analógica A0 do arduino Uno</li>
 </ul>
-
-

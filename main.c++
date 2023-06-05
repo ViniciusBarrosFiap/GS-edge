@@ -81,7 +81,7 @@ void loop()
   mediaUmi = leiturasUmi / 5; //resultado média de 5 leituras da umidade
   
   //Atualizando peso do estoque
-  if (forceKg > 10 and forceKg < 40){
+  if (forceKg > 10 and forceKg < 30){
     digitalWrite(greenLedPin, HIGH);
     digitalWrite(yellowLedPin, LOW);
     digitalWrite(redLedPin, LOW);
@@ -94,7 +94,7 @@ void loop()
     lcd.print(" kg  ");
     delay(3000);
   }
-  else if (forceKg > 40){
+  else if (forceKg > 30){
     digitalWrite(greenLedPin, LOW);
     digitalWrite(yellowLedPin, LOW);
     digitalWrite(redLedPin, HIGH);
@@ -124,7 +124,7 @@ void loop()
  
   
   //Temperatura boa
-  if (mediaTemp > 15 and mediaTemp < 25){
+  if (mediaTemp > 10 and mediaTemp < 20){
   	digitalWrite(greenLedPin, HIGH);
     digitalWrite(yellowLedPin, LOW);
     digitalWrite(redLedPin, LOW);
@@ -159,7 +159,7 @@ void loop()
     // faz com que a buzina toque sem parar enquanto estiver acima de 15 graus
     if (!buzzerAtivo) {
       buzzerAtivo = true;
-      while (temperaturaC > 15) {
+      while (temperaturaC > 25) {
         tone(buzzerPin, 1000);
         delay(buzzerDuration);
         noTone(buzzerPin);
@@ -194,30 +194,11 @@ void loop()
     lcd.setCursor(10,1);
     lcd.print("C");
     delay(1000);
-   	// faz com que a buzina toque sem parar enquanto estiver abaixo de 10 graus
-    if (!buzzerAtivo) {
-      buzzerAtivo = true;
-      while (temperaturaC < 10) {
-        tone(buzzerPin, 1000);
-        delay(buzzerDuration);
-        noTone(buzzerPin);
-        sensorTempTensao = analogRead(sensorTempPino);
-    	tensao = sensorTempTensao * 5.0 / 1024.0;
-    	temperaturaC = (tensao - 0.5) * 100.0;
-      }
-      buzzerAtivo = false;
-    }
-   	else {
-    	digitalWrite(greenLedPin, HIGH);
-    	digitalWrite(yellowLedPin, LOW);
-    	digitalWrite(redLedPin, LOW);
-    	noTone(buzzerPin);
-    	buzzerAtivo = false;
-  }
+   	
   }
   
   //Atualiza estado da umidade
-  if (porcem > 50 and porcem < 70) {
+  if (porcem > 10 and porcem < 20) {
   	lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Umidade OK");
@@ -229,7 +210,7 @@ void loop()
     lcd.print("%");
     delay(1000);
   }
-  else if (porcem > 70) {
+  else if (porcem > 30) {
   	lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Umidade ALTA");
@@ -258,24 +239,6 @@ void loop()
     lcd.print("%");
     delay(1000);
     
-    if (!buzzerAtivo) {
-     buzzerAtivo = true;
-      while (porcem < 50) {
-        tone(buzzerPin, 1000);
-        delay(buzzerDuration);
-        noTone(buzzerPin);
-        int SensorUmidTensao=analogRead(SensorUmidPino);
-        porcem=map(SensorUmidTensao,0,1023,0,100);
-        
-      }
-      buzzerAtivo = false;
-    }
-   	else {
-    	digitalWrite(greenLedPin, HIGH);
-    	digitalWrite(yellowLedPin, LOW);
-    	digitalWrite(redLedPin, LOW);
-    	noTone(buzzerPin);
-    	buzzerAtivo = false;
-  }
+    
   }
 }
